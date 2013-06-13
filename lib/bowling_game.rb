@@ -6,12 +6,12 @@ class BowlingGame
 
   def roll score
     
-	if ended?
+  	if ended?
       raise "Game ended."
     end
     
     frame = get_current_frame
-	frame.roll score
+	  frame.roll score
   end
 
   def frame_score frame_index
@@ -43,7 +43,7 @@ class BowlingGame
 	if @frames.last.complete?
       frame = Frame.new
       @frames << frame
-	  frame
+	    frame
     else
       @frames.last
     end
