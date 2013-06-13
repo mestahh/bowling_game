@@ -2,18 +2,15 @@ class Frame
   attr_reader :score
   
   def initialize
-    @throw_counter = 0
-    @score = 0
+    @throws = []
   end
 
   def throw score
-    @score += score
-    @throw_counter += 1
+    @throws << score
   end
 
   def complete?
-    
-    if @throw_counter == 2 || strike?
+    if @throws.size == 2 || strike?
       return true
     end
     
@@ -21,6 +18,31 @@ class Frame
   end
   
   def strike?
-    @throw_counter == 1 && @score == 10
+    @throws.size == 1 && @throws[0] == 10
+  end
+  
+  def first_throw
+    @throws[0]
+  end
+  
+  def second_throw
+    @throws[1]
+  end
+  
+  def score
+    if @throws.size == 1
+      return @throws[0]
+    end
+    if @throws.size == 2
+      return @throws[0] + @throws[1]
+    end
+    return 0
+  end
+  
+  def spare?
+    if score == 10 && @throws.size == 2
+      return true
+    end
+    false
   end
 end
