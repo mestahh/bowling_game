@@ -1,4 +1,5 @@
 class Frame
+  
   def initialize
     @rolls = []
   end
@@ -8,11 +9,7 @@ class Frame
   end
 
   def complete?
-    if @rolls.size == 2 || strike?
-    return true
-    end
-
-    false
+    @rolls.size == 2 || strike?
   end
 
   def strike?
@@ -29,18 +26,15 @@ class Frame
 
   def score
     if @rolls.size == 1
-      @rolls[0]
+      return @rolls[0]
     end
     if @rolls.size == 2
-      @rolls[0] + @rolls[1]
+      return @rolls[0] + @rolls[1]
     end
     return 0
   end
 
   def spare?
-    if score == 10 && @rolls.size == 2
-      true
-    end
-    false
+    score == 10 && @rolls.size == 2
   end
 end
