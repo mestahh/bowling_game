@@ -29,13 +29,15 @@ class BowlingGame
 
     @frames.each_index do |index|
 
-      if @frames[index].strike?
-        sum_of_scores += @frames[index].score + next_throw_score(index) + second_next_throw_score(index)
-      elsif @frames[index].spare?
-        sum_of_scores += @frames[index].score + next_throw_score(index)
-      else
-        sum_of_scores += @frames[index].score
+      frame = @frames[index]
+      sum_of_scores += frame.score
+      
+      if frame.strike? && not_last_frame(index)
+        sum_of_scores +=  next_throw_score(index) + second_next_throw_score(index)
+      elsif frame.spare?
+        sum_of_scores +=  next_throw_score(index)
       end
+      
     end
     return sum_of_scores
   end
@@ -56,8 +58,12 @@ class BowlingGame
   
   private
   
+  def not_last_frame index
+    index != 9
+  end
+  
   def ended?
-    if @frames.size == 10 && @frames[9].complete?
+    if @frames.size == 10 && (@frames[9].complete? && !@frames[9].strike?)
       return true
     end
     false

@@ -137,8 +137,54 @@ describe BowlingGame do
     @game.throw 4
     @game.throw 3
 
-     expect { @game.throw 3 }.to raise_error("Game ended.") 
+    expect { @game.throw 3 }.to raise_error("Game ended.") 
   
   end
 
+  it "add two extra balls at the end if the 10th frame was a strike" do
+    @game.throw 4
+    @game.throw 3
+
+    @game.throw 4
+    @game.throw 3
+
+    @game.throw 4
+    @game.throw 3
+
+    @game.throw 4
+    @game.throw 3
+
+    @game.throw 4
+    @game.throw 3
+
+    @game.throw 4
+    @game.throw 3
+
+    @game.throw 4
+    @game.throw 3
+
+    @game.throw 4
+    @game.throw 3
+
+    @game.throw 4
+    @game.throw 3
+
+    @game.throw 10
+
+    @game.throw 5
+    @game.throw 3
+    
+    @game.score.should eq(81)
+  end
+  
+  it "can count a turkeys pinfall" do
+    @game.throw 10
+    @game.throw 10
+    @game.throw 10
+    @game.throw 0
+    @game.throw 9
+    
+    @game.score.should eq(78)
+    
+  end
 end
